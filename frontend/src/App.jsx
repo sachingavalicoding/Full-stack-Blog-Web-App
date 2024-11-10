@@ -1,14 +1,17 @@
-
-import AddBlog from './Components/AddBlog';
-import BlogList from './Components/BlogList';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./Components/HomePage.jsx";
+import BlogList from "./Components/BlogList.jsx";
+import AddBlog from "./Components/AddBlog.jsx";
 
 const App = () => {
   return (
-    <div>
-      <h1 className='text-red-500'>Blog App</h1>
-      <AddBlog />
-      <BlogList />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/blogs" element={<BlogList />} />
+        <Route path="/add-blog" element={<AddBlog />} />
+      </Routes>
+    </Router>
   );
 };
 
