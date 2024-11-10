@@ -1,15 +1,19 @@
 {
   "name": "blog-app",
   "version": "1.0.0",
+  "type": "module",
   "description": "blog full stack application ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon src/index.js"
   },
   "keywords": [
     "blog",
     "app"
   ],
   "author": "sachin",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
 }
