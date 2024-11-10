@@ -13,8 +13,6 @@ router.post('/blogs', async (req, res) => {
     if (!title || !content || !author) {
       return res.status(400).json({ message: 'Title, content, and author are required' });
     }
-
-    // Create a new blog post
     const newBlog = new Blog({
       title,
       content,

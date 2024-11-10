@@ -5,7 +5,7 @@ import BlogList from './Components/BlogList';
 const App = () => {
   return (
     <div>
-      <h1>Blog App</h1>
+      <h1 className='text-red-500'>Blog App</h1>
       <AddBlog />
       <BlogList />
     </div>
