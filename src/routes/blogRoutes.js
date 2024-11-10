@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Route to create a new blog post
 router.post('/blogs', async (req, res) => {
+    console.log(req.body);
   try {
     const { title, content, author } = req.body;
 

@@ -9,7 +9,7 @@ dotenv.config(); // Load environment variables from .env
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
+app.use(express.urlencoded({ extended: true }));
 // Middleware to parse incoming JSON requests
 app.use(express.json());
 app.use(cors()); // allow all requests 
