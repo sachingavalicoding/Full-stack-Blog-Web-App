@@ -1,32 +1,27 @@
 import mongoose from "mongoose";
 
-// Define the schema for a Blog post
-const blogSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: [true, "Title is required"],
-      trim: true,
-    },
-    content: {
-      type: String,
-      required: [true, "Content is required"],
-    },
-    author: {
-      type: String,
-      required: [true, "Author is required"],
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
+const blogSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
   },
-  {
-    timestamps: true, // Adds createdAt and updatedAt fields automatically
-  }
-);
+  content: {
+    type: String,
+    required: true,
+  },
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  image: {
+    type: String, // Store the URL or path to the uploaded image
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-// Create the Blog model using the schema
 const Blog = mongoose.model("Blog", blogSchema);
-
 export default Blog;
