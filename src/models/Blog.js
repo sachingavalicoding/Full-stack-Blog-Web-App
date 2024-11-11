@@ -1,27 +1,28 @@
 import mongoose from "mongoose";
 
-const blogSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const BlogSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String, // Store image path (e.g., '/uploads/image.jpg')
+      default: null,
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
-  content: {
-    type: String,
-    required: true,
-  },
-  author: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  image: {
-    type: String, // Store the URL or path to the uploaded image
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true }
+);
 
-const Blog = mongoose.model("Blog", blogSchema);
+const Blog = mongoose.model("Blog", BlogSchema);
+
 export default Blog;
