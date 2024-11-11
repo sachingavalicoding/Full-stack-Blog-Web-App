@@ -1,27 +1,33 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from './AuthContext';
 
 const AddBlog = () => {
+  const { token } = useAuth(); // Get the token
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState('');  
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/blogs', {
-        title,
-        content,
-        author,
-      });
+      await axios.post(
+        'http://localhost:5000/api/blogs',
+        { title, content, author },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Pass JWT in the headers
+          },
+        }
+      );
       setMessage('Blog added successfully!');
       setTitle('');
       setContent('');
       setAuthor('');
     } catch (error) {
-      console.log("ADD BLOG ERROR", error);
       setMessage('Error adding blog!');
+      console.error(error);
     }
   };
 
