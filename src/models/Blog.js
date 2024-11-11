@@ -10,10 +10,7 @@ const BlogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
-      type: String, // Store image path (e.g., '/uploads/image.jpg')
-      default: null,
-    },
+    image: { type: String, default: "/images/default.jpg" },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

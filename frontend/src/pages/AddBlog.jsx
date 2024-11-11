@@ -5,38 +5,50 @@ import axios from "axios";
 const AddBlog = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null); // To hold the image file
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // For loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Show loading indicator
+    setLoading(true);
 
     try {
       const token = localStorage.getItem("token");
-      console.log(token);
       if (!token) {
         setError("You must be logged in to create a blog!");
         setLoading(false);
         return;
       }
 
-      const newBlog = { title, content, image };
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", content);
+      if (image) {
+        formData.append("image", image); // Append image if provided
+      }
 
-      await axios.post("http://localhost:5000/api/blogs", newBlog, {
+      await axios.post("http://localhost:5000/api/blogs", formData, {
         headers: {
-          Authorization: `Bearer ${token}`, // Make sure the token is included properly
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data", // Important for file upload
         },
       });
 
-      setLoading(false); // Hide loading indicator
-      navigate("/"); // Redirect to homepage or blog list after success
+      setLoading(false);
+      navigate("/"); // Redirect to homepage or blog list
     } catch (error) {
       setError("Error creating blog, please try again!");
       console.error(error);
-      setLoading(false); // Hide loading indicator
+      setLoading(false);
     }
   };
 
@@ -89,13 +101,13 @@ const AddBlog = () => {
               htmlFor="image"
               className="block text-gray-600 font-medium mb-2"
             >
-              Image URL (Optional)
+              Upload Image (Optional)
             </label>
             <input
-              type="text"
+              type="file"
               id="image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              accept="image/*"
+              onChange={handleImageChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>

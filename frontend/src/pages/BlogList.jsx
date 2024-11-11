@@ -1,4 +1,3 @@
-// BlogList.js
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -6,6 +5,7 @@ import { Link } from "react-router-dom";
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
   const [search, setSearch] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     // Fetch all blogs
@@ -15,7 +15,8 @@ const BlogList = () => {
         console.log(response.data);
         setBlogs(response.data);
       } catch (error) {
-        console.error("Error fetching blogs:", error);
+        console.log(" GET BLOGS ERROR", error);
+        setError("Error fetching blogs");
       }
     };
 
@@ -28,6 +29,7 @@ const BlogList = () => {
 
   return (
     <div className="container mx-auto p-4">
+      {error && <p className="text-red-500">{error}</p>}
       <input
         type="text"
         value={search}
@@ -39,7 +41,7 @@ const BlogList = () => {
         {filteredBlogs.map((blog) => (
           <div key={blog._id} className="card bg-gray-100 p-4">
             <img
-              src={blog.image || "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+              src={`http://localhost:3000/${blog.image}`}
               alt={blog.title}
               className="w-full h-48 object-cover"
             />
