@@ -24,7 +24,7 @@ mongoose
 
 // Use the blog routes for the /api path
 app.use("/api", blogRoutes);
-app.use("/api/user",authRoutes);
+app.use("/api", authRoutes);
 
 // Start the server on the specified port
 app.listen(PORT, () => {
