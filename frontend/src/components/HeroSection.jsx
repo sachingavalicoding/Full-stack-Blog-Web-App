@@ -1,7 +1,10 @@
 
+
 const HeroSection = () => {
   return (
-    <div>HeroSection</div>
+    <main>
+      
+    </main>
   )
 }
 
