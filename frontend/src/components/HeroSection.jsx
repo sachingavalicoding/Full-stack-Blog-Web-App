@@ -3,7 +3,7 @@
 const HeroSection = () => {
   return (
     <main>
-      
+      {/*  use grid  */}
     </main>
   )
 }
