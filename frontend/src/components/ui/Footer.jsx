@@ -4,7 +4,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaEnvelope } from 'r
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-10">
+    <footer className="bg-slate-950 text-white py-10">
       <div className="container mx-auto px-6 lg:px-20">
         {/* Quote/Heading Section */}
         <div className="text-center mb-8">
